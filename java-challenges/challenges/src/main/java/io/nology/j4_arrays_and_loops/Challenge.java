@@ -64,30 +64,15 @@ public class Challenge {
      * @return an array containing the middle item(s)
      */
     public String[] findMiddleItems(String[] array) {
-        //Step 1: Deal with edge case. if statement:
-        //array empty or array length is 0, return an empty string array.
-
-        //Step 2: create a variable of type int to get the array length using .length method
-        //Step 3: variable middleIndex of int type to get mid way point of array
-
-        //Step 4: if statement: modulo not 0, return new String[]{arrayname[value]}
-        // else -1 value and midd value
-
-        // If the array is empty, return an empty array
-        if (array == null || array.length == 0) {
-            return new String[0];
+        if (array.length == 0) {
+            return new String[]{};
         }
+        int mid = array.length / 2;
 
-        int length = array.length;
-        int middleIndex = length / 2;
-
-        // If the array has an odd number of items
-        if (length % 2 != 0) {
-            return new String[]{array[middleIndex]};
-        }
-        // If the array has an even number of items
-        else {
-            return new String[]{array[middleIndex - 1], array[middleIndex]};
+        if (array.length % 2 != 0) {
+            return new String[]{array[mid]};
+        } else {
+            return new String[]{array[mid-1], array[mid]};
         }
     }
 
@@ -134,13 +119,13 @@ public class Challenge {
      * @return the sum of all odd numbers in the array
      */
     public int sumOfOddNumbers(int[] array) {
-        int sum = 0;
+        int result = 0;
+
         for (int value : array) {
             if (value % 2 != 0) {
-                sum += value;
+                result += value;
             }
-        }
-        return sum;
+        } return result;
     }
 
     /***
