@@ -1,5 +1,7 @@
 package io.nology.j5_arrays_extended;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Random;
 
 public class Challenge {
@@ -19,21 +21,23 @@ public class Challenge {
      *         67 34 89 75
      */
     public void print2DArray(int rows, int columns) {
-        Random rand = new Random();
         int[][] array = new int[rows][columns];
+        Random random = new Random();
 
+        // Fill the array with random numbers
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                array[i][j] = rand.nextInt(100);
+                array[i][j] = random.nextInt(100);
             }
-        }
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                System.out.println(array[i][j] + " ");
-            }
-            System.out.println();
         }
 
+        // Print the array in matrix format
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                System.out.print(array[i][j] + " ");
+            }
+            System.out.println(); // New line for the next row
+        }
     }
 
     /**
@@ -43,7 +47,7 @@ public class Challenge {
      *              14 73 28 42
      *              39 91 19 46
      *              67 34 89 75
-     * @return the maximum element in each row of the arrat, printed one under the
+     * @return the maximum element in each row of the array, printed one under the
      *         other
      *         Example output:
      *         73
@@ -51,8 +55,25 @@ public class Challenge {
      *         89
      */
     public void findMaxInRows(int[][] array) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array must not be null or empty.");
+        }
 
-        return;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == null || array[i].length == 0) {
+                throw new IllegalArgumentException("Each row must contain at least one element.");
+            }
+
+            int max = array[i][0]; // Initialize max with first element of row
+
+            for (int j = 1; j < array[i].length; j++) {
+                if (array[i][j] > max) {
+                    max = array[i][j]; // Update max if a larger number is found
+                }
+            }
+
+            System.out.println(max); // Print max of the current row
+        }
     }
 
     /**
@@ -76,6 +97,24 @@ public class Challenge {
      *                                  is invalid
      */
     public void sortByColumn(int[][] array, int columnIndex) {
-        return;
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array must not be null or empty.");
+        }
+
+        int numColumns = array[0].length;
+        if (columnIndex < 0 || columnIndex >= numColumns) {
+            throw new IllegalArgumentException("Invalid column index");
+        }
+
+        // Sort using Arrays.sort with a custom comparator
+        Arrays.sort(array, Comparator.comparingInt(row -> row[columnIndex]));
+
+        // Print the sorted array
+        for (int[] row : array) {
+            for (int value : row) {
+                System.out.print(value + " ");
+            }
+            System.out.println();
+        }
     }
 }
